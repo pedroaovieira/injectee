@@ -6,6 +6,7 @@
 // Default LED blinks 2 times on boot, ~1 per sec and 5 times fast if a failure was detected 
 
 #define VERSION "Injectee v0.0.2"
+#define GITHUB "kripthor/injectee"
 
 #ifdef ARDUINO_ARCH_RP2040
  #include "FI_RP2040.h"
@@ -47,13 +48,21 @@ inline uint32_t crunch() {
 void setup() {
   arch_setup();
   arch_blink(2,500);
+  arch_log("\r\n");
+  arch_log("#######################################\r\n");
+  arch_log("\r\n");
   arch_log(VERSION);
-  arch_log("\r\nInitializing number crunching of:\r\n");
-  arch_log(str_to_crunch);
+  arch_log("\r\n");
+  arch_log(GITHUB);
+  arch_log("\r\n");
+  //arch_log("\r\nInitializing number crunching of:\r\n");
+  //arch_log(str_to_crunch);
   crunch_ok = crunch();
   arch_log("Crunch = 0x");
   arch_logt(crunch_ok, HEX);
   arch_log("\r\nStarting loop...\r\n");
+  arch_log("0  | ");
+  arch_log("I'm doing important stuff !!!! Leave me alone!!!\r\n");
 }
 
 //loop forever calculating new crunch value and comparing with crunch value calculated on setup
@@ -73,115 +82,33 @@ void loop() {
       if (crunch_res != crunch_ok)  {
         
         // FAULT INJECTION DETECTED: BLINK AND LOG (FURTHER EXECUTION IS HIGHLY UNSTABLE)
-        // arch_blink(5,100);
-        // arch_log("\r\noO ! CRUNCH FAILURE ! Oo\r\n");
-        // arch_logt(counter, DEC);
-        // arch_log(" | 0x"); arch_logt(crunch_ok, HEX);
-        // arch_log(" == 0x"); arch_logt(crunch_res, HEX);
-        // arch_log("\r\n");
-        // arch_log(str_to_crunch);
+        arch_blink(5,100);
+        arch_log("\r\noO ! CRUNCH FAILURE ! Oo\r\n");
+        arch_logt(counter, DEC);
+        arch_log(" | 0x"); arch_logt(crunch_ok, HEX);
+        arch_log(" == 0x"); arch_logt(crunch_res, HEX);
+        arch_log("\r\n");
+        arch_log(str_to_crunch);
 
+        arch_log(" #######                               ###                                                      ### ### ### \r\n");
+        arch_log(" #         ##   #    # #      #####     #  #    #      # ######  ####  ##### #  ####  #    #    ### ### ### \r\n");
+        arch_log(" #        #  #  #    # #        #       #  ##   #      # #      #    #   #   # #    # ##   #    ### ### ### \r\n");
+        arch_log(" #####   #    # #    # #        #       #  # #  #      # #####  #        #   # #    # # #  #     #   #   #  \r\n");
+        arch_log(" #       ###### #    # #        #       #  #  # #      # #      #        #   # #    # #  # #                \r\n");
+        arch_log(" #       #    # #    # #        #       #  #   ## #    # #      #    #   #   # #    # #   ##    ### ### ### \r\n");
+        arch_log(" #       #    #  ####  ######   #      ### #    #  ####  ######  ####    #   #  ####  #    #    ### ### ### \r\n");
+        arch_log("\r\n");
 
-
-
-		arch_log("2                                      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠚⠉⠀⠀⠉⠑⢦");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⠀⠀⠀⠀⠀⠀⠀⠱⡄");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⢀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡀");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⢣");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⣠⠔⠋⠉⣩⣍⠉⠙⠢⣄⠀⢸");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⢧⡜⢏⠓⠒⠚⠁⠈⠑⠒⠚⣹⢳⡸");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⠸⡄⠀⠀⠀⠀⠀⠀⢠⠇⣰⠃");
-		arch_log("                                      ⠀⠀⠀⠀⠀⠀⢀⡴⠚⠉⢣⡙⢦⡀⠀⠀⢀⡰⢋⡜⠉⠓⠦⣀");
-		arch_log("                                      ⠀⠀⠀⠀⠀⡴⠁⢀⣀⣀⣀⣙⣦⣉⣉⣋⣉⣴⣋⣀⣀⣀⡀⠈⢧");
-		arch_log("                                      ⠀⠀⠀⠀⡸⠁⠀⢸⠀⠀⠀⠀⢀⣔⡛⠛⡲⡀⠀⠀⠀⠀⡇⠀⠈⢇");
-		arch_log("                                      ⠀⠀⠀⢠⠇⠀⠀⠸⡀⠀⠀⠀⠸⣼⠽⠯⢧⠇⠀⠀⠀⠀⡇⠀⠀⠘⡆");
-		arch_log("                                      ⠀⠀⠀⣸⠀⠀⠀⠀⡇⠀⠀⠀⠳⢼⡦⢴⡯⠞⠀⠀⠀⢰⠀⠀⠀⠀⢧");
-		arch_log("                                      ⠀⠀⠀⢻⠀⠀⠀⠀⡇⠀⠀⠀⢀⡤⠚⠛⢦⣀⠀⠀⠀⢸⠀⠀⠀⠀⡼");
-		arch_log("                                      ⠀⠀⠀⠈⠳⠤⠤⣖⣓⣒⣒⣒⣓⣒⣒⣒⣒⣚⣒⣒⣒⣚⣲⠤⠤⠖⠁");
-		arch_log("                                      ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀");
-		arch_log("                                      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
-		arch_log(" ");
-		arch_log(" ");                                  
-		arch_log(" #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  ##### ");
-		arch_log("                                                                                                                       ");
-		arch_log("      #####                                                                                                            ");
-		arch_log("     #     #   ####   #    #   ####   #####     ##    #####  #    #  #         ##    #####  #   ####   #    #   ####   ");
-		arch_log("     #        #    #  ##   #  #    #  #    #   #  #     #    #    #  #        #  #     #    #  #    #  ##   #  #       ");
-		arch_log("     #        #    #  # #  #  #       #    #  #    #    #    #    #  #       #    #    #    #  #    #  # #  #   ####   ");
-		arch_log("     #        #    #  #  # #  #  ###  #####   ######    #    #    #  #       ######    #    #  #    #  #  # #       #  ");
-		arch_log("     #     #  #    #  #   ##  #    #  #   #   #    #    #    #    #  #       #    #    #    #  #    #  #   ##  #    #  ");
-		arch_log("      #####    ####   #    #   ####   #    #  #    #    #     ####   ######  #    #    #    #   ####   #    #   ####   ");
-		arch_log("                                                                                                                       ");
-		arch_log("     #     #                  ###                                  #     #                                             ");
-		arch_log("      #   #    ####   #    #  ###  #####   ######        ##        #     #    ##     ####   #    #  ######  #####      ");
-		arch_log("       # #    #    #  #    #   #   #    #  #            #  #       #     #   #  #   #    #  #   #   #       #    #     ");
-		arch_log("        #     #    #  #    #  #    #    #  #####       #    #      #######  #    #  #       ####    #####   #    #     ");
-		arch_log("        #     #    #  #    #       #####   #           ######      #     #  ######  #       #  #    #       #####      ");
-		arch_log("        #     #    #  #    #       #   #   #           #    #      #     #  #    #  #    #  #   #   #       #   #      ");
-		arch_log("        #      ####    ####        #    #  ######      #    #      #     #  #    #   ####   #    #  ######  #    #     ");
-		arch_log("                                                                                                                       ");
-		arch_log(" #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  #####  ##### ");
-                                                                                                                       
-
-
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠚⠉⠀⠀⠉⠑⢦");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⠀⠀⠀⠀⠀⠀⠀⠱⡄");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⢀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡀");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⢣");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⣠⠔⠋⠉⣩⣍⠉⠙⠢⣄⠀⢸");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⢧⡜⢏⠓⠒⠚⠁⠈⠑⠒⠚⣹⢳⡸");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⠸⡄⠀⠀⠀⠀⠀⠀⢠⠇⣰⠃");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⠀⢀⡴⠚⠉⢣⡙⢦⡀⠀⠀⢀⡰⢋⡜⠉⠓⠦⣀");
-		arch_log("                                                          ⠀⠀⠀⠀⠀⡴⠁⢀⣀⣀⣀⣙⣦⣉⣉⣋⣉⣴⣋⣀⣀⣀⡀⠈⢧");
-		arch_log("                                                          ⠀⠀⠀⠀⡸⠁⠀⢸⠀⠀⠀⠀⢀⣔⡛⠛⡲⡀⠀⠀⠀⠀⡇⠀⠈⢇");
-		arch_log("                                                          ⠀⠀⠀⢠⠇⠀⠀⠸⡀⠀⠀⠀⠸⣼⠽⠯⢧⠇⠀⠀⠀⠀⡇⠀⠀⠘⡆");
-		arch_log("                                                          ⠀⠀⠀⣸⠀⠀⠀⠀⡇⠀⠀⠀⠳⢼⡦⢴⡯⠞⠀⠀⠀⢰⠀⠀⠀⠀⢧");
-		arch_log("                                                          ⠀⠀⠀⢻⠀⠀⠀⠀⡇⠀⠀⠀⢀⡤⠚⠛⢦⣀⠀⠀⠀⢸⠀⠀⠀⠀⡼");
-		arch_log("                                                          ⠀⠀⠀⠈⠳⠤⠤⣖⣓⣒⣒⣒⣓⣒⣒⣒⣒⣚⣒⣒⣒⣚⣲⠤⠤⠖⠁");
-		arch_log("                                                          ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀");
-		arch_log("                                                          ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
-		arch_log(" ");
-		arch_log(" ");
-		arch_log(" ");                                                                                                                                                         
-		arch_log(" ");
-		arch_log(" ");
-		arch_log(" ");
-		arch_log(" ");
-		arch_log(" ");
-		arch_log(" ");
-		arch_log("  ######   #######  ##    ##  ######   ########     ###    ######## ##     ## ##          ###    ######## ####  #######  ##    ##  ######     #### #### #### ");
-		arch_log(" ##    ## ##     ## ###   ## ##    ##  ##     ##   ## ##      ##    ##     ## ##         ## ##      ##     ##  ##     ## ###   ## ##    ##    #### #### #### ");
-		arch_log(" ##       ##     ## ####  ## ##        ##     ##  ##   ##     ##    ##     ## ##        ##   ##     ##     ##  ##     ## ####  ## ##          #### #### #### ");
-		arch_log(" ##       ##     ## ## ## ## ##   #### ########  ##     ##    ##    ##     ## ##       ##     ##    ##     ##  ##     ## ## ## ##  ######      ##   ##   ##  ");
-		arch_log(" ##       ##     ## ##  #### ##    ##  ##   ##   #########    ##    ##     ## ##       #########    ##     ##  ##     ## ##  ####       ##                   ");
-		arch_log(" ##    ## ##     ## ##   ### ##    ##  ##    ##  ##     ##    ##    ##     ## ##       ##     ##    ##     ##  ##     ## ##   ### ##    ##    #### #### #### ");
-		arch_log("  ######   #######  ##    ##  ######   ##     ## ##     ##    ##     #######  ######## ##     ##    ##    ####  #######  ##    ##  ######     #### #### #### ");
-		arch_log("                                                                                                                                                             ");
-		arch_log("                                                                                                                                                             ");
-		arch_log("                                                                                                                                                             ");
-		arch_log("                                                                                                                                                             ");
-		arch_log(" ##    ##  #######  ##     ##             ###    ########  ########             ###             ##     ##    ###     ######  ##    ## ######## ########      ");
-		arch_log("  ##  ##  ##     ## ##     ##            ## ##   ##     ## ##                  ## ##            ##     ##   ## ##   ##    ## ##   ##  ##       ##     ##     ");
-		arch_log("   ####   ##     ## ##     ##           ##   ##  ##     ## ##                 ##   ##           ##     ##  ##   ##  ##       ##  ##   ##       ##     ##     ");
-		arch_log("    ##    ##     ## ##     ##          ##     ## ########  ######            ##     ##          ######### ##     ## ##       #####    ######   ########      ");
-		arch_log("    ##    ##     ## ##     ##          ######### ##   ##   ##                #########          ##     ## ######### ##       ##  ##   ##       ##   ##       ");
-		arch_log("    ##    ##     ## ##     ##          ##     ## ##    ##  ##                ##     ##          ##     ## ##     ## ##    ## ##   ##  ##       ##    ##      ");
-		arch_log("    ##     #######   #######           ##     ## ##     ## ########          ##     ##          ##     ## ##     ##  ######  ##    ## ######## ##     ##     ");
-		arch_log(" ");
-
-
-        delay(5000);
+        delay(3000);
       }
     }
   }
   arch_blink(1,50);
   arch_logt(counter, DEC);
   arch_log(" | ");
-  arch_logt(lps,DEC);
-  arch_log(" lps | 0x"); arch_logt(crunch_ok, HEX);
-  arch_log(" == 0x"); arch_logt(crunch_res, HEX);
+  //arch_logt(lps,DEC);
+  //arch_log(" lps | 0x"); //arch_logt(crunch_ok, HEX);
+  //arch_log(" == 0x"); arch_logt(crunch_res, HEX);
   arch_log("I'm doing important stuff !!!! Leave me alone!!!");
   arch_log("\r\n");
 }
