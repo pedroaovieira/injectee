@@ -5,7 +5,7 @@
 // Software serial RX pin2 / TX pin3 115200 8N1
 // Default LED blinks 2 times on boot, ~1 per sec and 5 times fast if a failure was detected 
 
-#define VERSION "Injectee v0.0.2"
+#define VERSION "Injectee v0.0.2 PV"
 #define GITHUB "kripthor/injectee"
 
 #ifdef ARDUINO_ARCH_RP2040
